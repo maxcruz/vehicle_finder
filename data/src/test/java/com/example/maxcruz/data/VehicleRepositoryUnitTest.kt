@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations
 import retrofit2.Call
 import retrofit2.Response
 
-class VehicleRepositoryTest {
+class VehicleRepositoryUnitTest {
 
     private lateinit var repository: VehicleRepository
 
