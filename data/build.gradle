@@ -1,12 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
 
     compileSdkVersion sdk_version
     defaultConfig {
-        applicationId "com.example.maxcruz.vehiclefinder"
         minSdkVersion min_sdk_version
         targetSdkVersion sdk_version
         versionCode version_code
@@ -28,6 +26,4 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_version"
     testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 }
