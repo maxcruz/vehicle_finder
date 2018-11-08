@@ -5,6 +5,7 @@ import arrow.core.Left
 import arrow.core.Right
 import com.example.maxcruz.data.dto.Point
 import com.example.maxcruz.data.dto.PointList
+import com.example.maxcruz.data.exception.ServerException
 import com.example.maxcruz.data.remote.MyTaxiService
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -15,7 +16,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import retrofit2.Call
 import retrofit2.Response
-import java.net.SocketTimeoutException
 
 class VehicleRepositoryTest {
 
@@ -53,7 +53,7 @@ class VehicleRepositoryTest {
     @Test
     fun getPointListFailure() {
         // Given
-        val throwable = SocketTimeoutException()
+        val throwable = ServerException()
         given(call.execute()).willThrow(throwable)
         given(service.getVehicles(anyDouble(), anyDouble(), anyDouble(), anyDouble())).willReturn(call)
 

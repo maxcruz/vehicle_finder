@@ -1,3 +1,5 @@
 package com.example.maxcruz.data.exception
 
-class ServerException: Throwable()
+import java.lang.RuntimeException
+
+class ServerException: RuntimeException()
