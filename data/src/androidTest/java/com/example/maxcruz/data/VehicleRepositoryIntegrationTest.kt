@@ -1,15 +1,56 @@
 package com.example.maxcruz.data
 
-import android.support.test.filters.LargeTest
-import android.support.test.runner.AndroidJUnit4
-import org.junit.runner.RunWith
+import android.support.test.InstrumentationRegistry
+import com.example.maxcruz.data.remote.MyTaxiService
+import com.example.maxcruz.data.remote.createService
+import com.google.common.truth.Truth.assertThat
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.mockito.ArgumentMatchers.anyDouble
 
-@LargeTest
-@RunWith(AndroidJUnit4::class)
+
 class VehicleRepositoryIntegrationTest {
 
-    fun setUp() {
+    @get:Rule
+    var mockWebServerRule = MockWebServerRule()
 
+    private lateinit var service: MyTaxiService
+
+    @Before
+    fun setUp() {
+        service = createService(MyTaxiService::class.java, mockWebServerRule.url)
+    }
+
+    @Test
+    fun getExchangeRateSuccess() {
+        // Given
+        mockWebServerRule.enqueueResponse(getBodyFromFile())
+
+        // When
+        val response = service.getVehicles(anyDouble(), anyDouble(), anyDouble(), anyDouble()).execute()
+
+        // Then
+        assertThat(response.isSuccessful).isTrue()
+        assertThat(response.body()?.poiList?.isNotEmpty() ?: false).isTrue()
+    }
+
+    @Test
+    fun getExchangeRateError() {
+        // Given
+        mockWebServerRule.enqueueNotFound()
+
+        // When
+        val response = service.getVehicles(anyDouble(), anyDouble(), anyDouble(), anyDouble()).execute()
+
+        // Then
+        assertThat(response.isSuccessful).isFalse()
+        assertThat(response.errorBody()).isNotNull()
+    }
+
+    private fun getBodyFromFile(): String {
+        val context = InstrumentationRegistry.getInstrumentation().context
+        return RestServiceTestHelper.getStringFromFile(context, "points_success.json")
     }
 
 }
