@@ -1,4 +1,4 @@
-package com.example.maxcruz.data.dto
+package com.example.maxcruz.domain.models
 
 /**
  * GPS coordinate mapping
