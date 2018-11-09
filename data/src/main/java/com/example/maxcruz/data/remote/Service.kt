@@ -1,5 +1,7 @@
 package com.example.maxcruz.data.remote
 
+import com.example.maxcruz.data.remote.adapters.FleetTypeAdapter
+import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -11,6 +13,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  */
 fun <T> createService(clazz: Class<T>, endPoint: String): T = Retrofit.Builder()
     .baseUrl(endPoint)
-    .addConverterFactory(MoshiConverterFactory.create())
+    .addConverterFactory(getMoshiConverterFactory())
     .build()
     .create(clazz)
+
+fun getMoshiConverterFactory(): MoshiConverterFactory {
+    val moshi = Moshi.Builder().add(FleetTypeAdapter()).build()
+    return MoshiConverterFactory.create(moshi)
+}
