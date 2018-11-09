@@ -22,7 +22,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -31,6 +33,9 @@ dependencies {
     implementation "io.arrow-kt:arrow-core:$arrow_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+
     androidTestImplementation "com.google.truth:truth:$truth_version"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "com.android.support.test:runner:$runner_version"

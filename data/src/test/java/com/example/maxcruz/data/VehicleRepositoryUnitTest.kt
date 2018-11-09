@@ -3,10 +3,10 @@ package com.example.maxcruz.data
 import arrow.core.Failure
 import arrow.core.Left
 import arrow.core.Right
-import com.example.maxcruz.data.dto.Point
 import com.example.maxcruz.data.dto.PointList
 import com.example.maxcruz.data.exception.ServerException
 import com.example.maxcruz.data.remote.MyTaxiService
+import com.example.maxcruz.domain.models.Point
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
