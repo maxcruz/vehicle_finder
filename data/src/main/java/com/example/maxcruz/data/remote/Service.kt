@@ -13,11 +13,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  */
 fun <T> createService(clazz: Class<T>, endPoint: String): T = Retrofit.Builder()
     .baseUrl(endPoint)
-    .addConverterFactory(getMoshiConverterFactory())
+    .addConverterFactory(getConverterFactory())
     .build()
     .create(clazz)
 
-fun getMoshiConverterFactory(): MoshiConverterFactory {
-    val moshi = Moshi.Builder().add(FleetTypeAdapter()).build()
-    return MoshiConverterFactory.create(moshi)
+fun getConverterFactory(): MoshiConverterFactory {
+    val parser = Moshi.Builder().add(FleetTypeAdapter()).build()
+    return MoshiConverterFactory.create(parser)
 }
