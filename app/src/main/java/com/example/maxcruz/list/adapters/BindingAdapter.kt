@@ -3,14 +3,13 @@ package com.example.maxcruz.list.adapters
 import android.databinding.BindingAdapter
 import android.location.Geocoder
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.maxcruz.domain.interactors.GetAddress
 import com.example.maxcruz.domain.models.Coordinate
 import com.example.maxcruz.domain.models.FleetType
-import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.vehiclefinder.R
+import java.io.IOException
 import java.util.*
 
 @BindingAdapter("fleetType")
@@ -42,9 +41,14 @@ fun ImageView.setFleetType(type: FleetType?) {
 @BindingAdapter("address", "use_case")
 fun TextView.setAddress(coordinate: Coordinate?, useCase: GetAddress) {
     val parameter = GetAddress.CallGeocoder(coordinate) { latitude, longitude ->
-        val geocoder = Geocoder(this.context, Locale.GERMANY)
-        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-        addresses.firstOrNull()?.getAddressLine(0) ?: "Unknown"
+        val geoCoder = Geocoder(this.context, Locale.GERMANY)
+        val noResult = "Unknown"
+        try {
+            val addresses = geoCoder.getFromLocation(latitude, longitude, 1)
+            addresses.firstOrNull()?.getAddressLine(0) ?: noResult
+        } catch (ex: IOException) {
+            noResult
+        }
     }
     useCase.execute(parameter) { either ->
         either.fold(
@@ -54,13 +58,6 @@ fun TextView.setAddress(coordinate: Coordinate?, useCase: GetAddress) {
             {
                 this.text = it
             })
-    }
-}
-
-@BindingAdapter("data")
-fun RecyclerView.setVehicleList(items: List<Point>) {
-    if (this.adapter is VehicleAdapter) {
-        (this.adapter as VehicleAdapter).updateList(items)
     }
 }
 

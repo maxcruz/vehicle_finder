@@ -8,12 +8,13 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import com.example.maxcruz.VehicleFinderApplication
+import com.example.maxcruz.core.BaseFragment
 import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.list.adapters.VehicleAdapter
 import com.example.maxcruz.vehiclefinder.R
@@ -25,7 +26,7 @@ import javax.inject.Inject
 /**
  * Display a list of vehicles to select
  */
-class VehicleListFragment : Fragment() {
+class VehicleListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentListBinding
 
@@ -49,6 +50,10 @@ class VehicleListFragment : Fragment() {
         setupList()
     }
 
+    override fun getTitle(): String {
+        return getString(R.string.list_title)
+    }
+
     private fun observeViewModelCommands() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory)[VehicleListViewModel::class.java]
         viewModel.command.observe(this, Observer {
@@ -65,7 +70,11 @@ class VehicleListFragment : Fragment() {
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-        viewModel.loadPoints()
+        viewModel.getVehiclePoints().observe(this, Observer { vehicles ->
+            vehicles?.let {
+                adapter.updateList(it)
+            }
+        })
     }
 
     private fun showError(message: String) {
@@ -75,7 +84,7 @@ class VehicleListFragment : Fragment() {
     }
 
     private fun navigateToMap(point: Point) {
-        println(point)
+        NavHostFragment.findNavController(this).navigate(R.id.action_listFragment_to_mapFragment)
     }
 
 }

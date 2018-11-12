@@ -8,6 +8,7 @@ import com.example.maxcruz.domain.interactors.GetAddress
 import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.vehiclefinder.R
 import com.example.maxcruz.vehiclefinder.databinding.ItemVehicleBinding
+import kotlinx.android.synthetic.main.item_vehicle.view.*
 
 /**
  * List item vehicle adapter
@@ -44,6 +45,7 @@ class VehicleAdapter(val getAddress: GetAddress, private val onItemClick: (point
             binding.item = point
             binding.getAddress = getAddress
             binding.root.setOnClickListener { onItemClick(point) }
+            binding.root.textAddress.text = ""
             binding.executePendingBindings()
         }
 

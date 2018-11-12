@@ -1,19 +1,28 @@
 package com.example.maxcruz.list
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.example.maxcruz.core.ObservableViewModel
 import com.example.maxcruz.core.SingleLiveEvent
 import com.example.maxcruz.domain.interactors.GetAddress
 import com.example.maxcruz.domain.interactors.GetPoints
-import com.example.maxcruz.domain.models.Coordinate
 import com.example.maxcruz.domain.models.Point
 import javax.inject.Inject
 
-class VehicleListViewModel @Inject constructor(private val getPoints: GetPoints,
-                                               val getAddress: GetAddress) : ObservableViewModel() {
+class VehicleListViewModel @Inject constructor(private val getPoints: GetPoints, val getAddress: GetAddress)
+    : ObservableViewModel() {
 
-    var pointList = listOf<Point>()
-    var isRefreshing = false
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
+    lateinit var pointList: MutableLiveData<List<Point>>
+    var isRefreshing = false
+
+    fun getVehiclePoints(): LiveData<List<Point>> {
+        if (!::pointList.isInitialized) {
+            pointList = MutableLiveData()
+            loadPoints()
+        }
+        return pointList
+    }
 
     fun loadPoints() {
         isRefreshing = true
@@ -24,12 +33,11 @@ class VehicleListViewModel @Inject constructor(private val getPoints: GetPoints,
             notifyChange()
             either.fold(
                 { failure ->
-                    val message = failure.exception.message ?: "Something went wrong :-("
+                    val message = failure.exception.message?.capitalize() ?: "Something went wrong :-("
                     command.value = Command.Error(message)
                 },
                 { list ->
-                    pointList = list
-                    notifyChange()
+                    pointList.postValue(list)
                 })
         }
     }
