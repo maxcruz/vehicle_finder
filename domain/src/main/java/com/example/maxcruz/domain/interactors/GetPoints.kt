@@ -30,6 +30,6 @@ class GetPoints(private val repository: PointListRepository,
     /**
      * App level exception for empty parameters
      */
-    class WrongParameters: Throwable()
+    class WrongParameters: Throwable("Wrong parameters")
 
 }
