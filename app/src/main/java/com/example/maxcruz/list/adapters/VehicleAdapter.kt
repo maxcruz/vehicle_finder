@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.maxcruz.domain.interactors.GetAddress
 import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.vehiclefinder.R
 import com.example.maxcruz.vehiclefinder.databinding.ItemVehicleBinding
@@ -11,7 +12,7 @@ import com.example.maxcruz.vehiclefinder.databinding.ItemVehicleBinding
 /**
  * List item vehicle adapter
  */
-class VehicleAdapter(private val onItemClick: (point: Point) -> Unit) :
+class VehicleAdapter(val getAddress: GetAddress, private val onItemClick: (point: Point) -> Unit) :
     RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>() {
 
     private val list = mutableListOf<Point>()
@@ -41,9 +42,11 @@ class VehicleAdapter(private val onItemClick: (point: Point) -> Unit) :
 
         fun bind(point: Point) {
             binding.item = point
+            binding.getAddress = getAddress
             binding.root.setOnClickListener { onItemClick(point) }
             binding.executePendingBindings()
         }
+
 
     }
 

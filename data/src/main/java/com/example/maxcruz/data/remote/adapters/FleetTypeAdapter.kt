@@ -6,6 +6,7 @@ import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.ToJson
 
 
+@Suppress("unused")
 class FleetTypeAdapter {
 
     @ToJson

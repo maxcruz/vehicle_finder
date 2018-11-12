@@ -20,9 +20,11 @@ annotation class ViewModelKey(val value: KClass<out ViewModel>)
 @Module
 abstract class ViewModelModule {
 
+    @Suppress("unused")
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
+    @Suppress("unused")
     @Binds
     @IntoMap
     @ViewModelKey(VehicleListViewModel::class)
