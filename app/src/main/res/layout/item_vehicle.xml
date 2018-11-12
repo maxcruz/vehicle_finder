@@ -16,7 +16,7 @@
         <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_margin="16dp"
+                android:layout_margin="10dp"
                 android:elevation="@dimen/cardview_default_elevation"
                 app:cardCornerRadius="10dp">
 
@@ -39,7 +39,7 @@
                         android:textSize="28sp"
                         android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:text="@{item.id}"
+                        android:text="@{safeUnbox(item.id)}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toTopOf="@+id/textAddress"
@@ -85,7 +85,7 @@
                         android:padding="3dp"
                         android:background="@drawable/fleet_tag_background"
                         android:textColor="@color/colorPrimaryDark"
-                        android:text="@{item.fleetType}"
+                        app:fleetType="@{item.fleetType}"
                         app:layout_constraintStart_toEndOf="@id/guideline"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/imageVehicle"

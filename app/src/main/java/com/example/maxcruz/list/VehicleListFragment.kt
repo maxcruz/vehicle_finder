@@ -7,7 +7,6 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.ListFragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,7 @@ import javax.inject.Inject
 /**
  * Display a list of vehicles to select
  */
-class ListFragment : Fragment() {
+class VehicleListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
 
@@ -32,12 +31,12 @@ class ListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context.applicationContext as VehicleFinderApplication).getListComponent().inject(this as ListFragment)
+        (context.applicationContext as VehicleFinderApplication).getListComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
-        binding.vm = ViewModelProviders.of(this, viewModelFactory)[ListViewModel::class.java]
+        binding.vm = ViewModelProviders.of(this, viewModelFactory)[VehicleListViewModel::class.java]
         return binding.root
     }
 

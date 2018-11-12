@@ -5,7 +5,7 @@ import com.example.maxcruz.domain.interactors.GetPoints
 import com.example.maxcruz.domain.models.Point
 import javax.inject.Inject
 
-class ListViewModel @Inject constructor(private val getPoints: GetPoints): ViewModel() {
+class VehicleListViewModel @Inject constructor(private val getPoints: GetPoints): ViewModel() {
 
     var pointList = listOf<Point>()
 

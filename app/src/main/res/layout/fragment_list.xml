@@ -1,20 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.maxcruz.list.ListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
+    <data>
+        <variable
+                name="vm"
+                type="com.example.maxcruz.list.VehicleListViewModel" />
+    </data>
+
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            tools:context="com.example.maxcruz.list.VehicleListFragment">
 
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="ite"/>
+                android:layout_height="wrap_content">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:data="@{vm.pointList}"
+                    tools:listitem="@layout/item_vehicle"/>
 
-</FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </FrameLayout>
+</layout>

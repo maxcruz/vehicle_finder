@@ -14,7 +14,7 @@ import com.example.maxcruz.vehiclefinder.databinding.ItemVehicleBinding
 class VehicleAdapter(private val onItemClick: (point: Point) -> Unit) :
     RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>() {
 
-    private lateinit var list: MutableList<Point>
+    private val list = mutableListOf<Point>()
 
     /**
      * Replace all the elements on the list and fill with the new one received as parameter
