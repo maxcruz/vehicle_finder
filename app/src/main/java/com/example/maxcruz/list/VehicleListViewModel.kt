@@ -13,7 +13,7 @@ class VehicleListViewModel @Inject constructor(private val getPoints: GetPoints,
     : ObservableViewModel() {
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
-    lateinit var pointList: MutableLiveData<List<Point>>
+    private lateinit var pointList: MutableLiveData<List<Point>>
     var isRefreshing = false
 
     fun getVehiclePoints(): LiveData<List<Point>> {
