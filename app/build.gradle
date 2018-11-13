@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        all {
+            resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+        }
     }
 
     dataBinding {
@@ -44,6 +47,8 @@ dependencies {
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
+
+    implementation "com.google.android.gms:play-services-maps:16.0.0"
 
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 

@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import com.example.maxcruz.core.BaseFragment
 import com.example.maxcruz.vehiclefinder.R
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 
 
-class VehicleMapFragment : BaseFragment() {
+class VehicleMapFragment : BaseFragment(), OnMapReadyCallback {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_map, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupMap()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -44,8 +47,18 @@ class VehicleMapFragment : BaseFragment() {
         (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
+    override fun onMapReady(map: GoogleMap?) {
+
+    }
+
     override fun getTitle(): String {
         return getString(R.string.map_title)
+    }
+
+    private fun setupMap() {
+        val mapFragment: SupportMapFragment? = activity?.supportFragmentManager?.
+            findFragmentById(R.id.mapView) as? SupportMapFragment
+        mapFragment?.getMapAsync(this)
     }
 
 }
