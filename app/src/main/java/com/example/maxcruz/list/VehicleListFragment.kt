@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -76,12 +75,6 @@ class VehicleListFragment : BaseFragment() {
                 adapter.updateList(it)
             }
         })
-    }
-
-    private fun showError(message: String) {
-        activity?.let {
-            Snackbar.make(layoutContainer, message, Snackbar.LENGTH_LONG).show()
-        }
     }
 
     private fun navigateToMap(point: Point) {
