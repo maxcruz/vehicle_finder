@@ -24,5 +24,9 @@
             android:id="@+id/mapFragment"
             android:name="com.example.maxcruz.map.VehicleMapFragment"
             android:label="fragment_map"
-            tools:layout="@layout/fragment_map"/>
+            tools:layout="@layout/fragment_map">
+
+        <argument android:name="point" app:argType="string"/>
+
+    </fragment>
 </navigation>

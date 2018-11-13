@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.maxcruz.core.ViewModelFactory
 import com.example.maxcruz.list.VehicleListViewModel
+import com.example.maxcruz.map.VehicleMapViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -17,17 +18,21 @@ annotation class ViewModelKey(val value: KClass<out ViewModel>)
 /**
  * Provide the ViewModelFactory to get any ViewModel with his dependencies
  */
+@Suppress("unused")
 @Module
 abstract class ViewModelModule {
 
-    @Suppress("unused")
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Suppress("unused")
     @Binds
     @IntoMap
     @ViewModelKey(VehicleListViewModel::class)
-    internal abstract fun listViewModel(viewModelVehicle: VehicleListViewModel): ViewModel
+    internal abstract fun listViewModel(viewModelList: VehicleListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VehicleMapViewModel::class)
+    internal abstract fun mapViewModel(viewModelMap: VehicleMapViewModel): ViewModel
 
 }

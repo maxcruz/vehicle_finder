@@ -48,9 +48,11 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
 
-    implementation "com.google.android.gms:play-services-maps:16.0.0"
+    implementation "com.google.android.gms:play-services-maps:$services_version"
 
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
 
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
     implementation "android.arch.navigation:navigation-fragment:$navigation_version"

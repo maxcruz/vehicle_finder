@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import com.example.maxcruz.VehicleFinderApplication
 import com.example.maxcruz.core.BaseFragment
+import com.example.maxcruz.core.toJson
 import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.list.adapters.VehicleAdapter
 import com.example.maxcruz.vehiclefinder.R
@@ -84,7 +85,9 @@ class VehicleListFragment : BaseFragment() {
     }
 
     private fun navigateToMap(point: Point) {
-        NavHostFragment.findNavController(this).navigate(R.id.action_listFragment_to_mapFragment)
+        val bundle = Bundle()
+        bundle.putString("point", point.toJson())
+        NavHostFragment.findNavController(this).navigate(R.id.action_listFragment_to_mapFragment, bundle)
     }
 
 }
