@@ -5,7 +5,7 @@ import arrow.core.Left
 import arrow.core.Right
 import com.example.maxcruz.data.dto.PointList
 import com.example.maxcruz.data.exception.ServerException
-import com.example.maxcruz.data.remote.MyTaxiService
+import com.example.maxcruz.data.remote.MyPositionsService
 import com.example.maxcruz.domain.models.Point
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -26,7 +26,7 @@ class VehicleRepositoryUnitTest {
     @Mock
     private lateinit var call: Call<PointList>
     @Mock
-    private lateinit var service: MyTaxiService
+    private lateinit var service: MyPositionsService
 
     @Before
     fun setUp() {

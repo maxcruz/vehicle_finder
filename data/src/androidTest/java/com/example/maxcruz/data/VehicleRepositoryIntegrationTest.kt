@@ -1,7 +1,7 @@
 package com.example.maxcruz.data
 
 import android.support.test.InstrumentationRegistry
-import com.example.maxcruz.data.remote.MyTaxiService
+import com.example.maxcruz.data.remote.MyPositionsService
 import com.example.maxcruz.data.remote.createService
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -15,11 +15,11 @@ class VehicleRepositoryIntegrationTest {
     @get:Rule
     var mockWebServerRule = MockWebServerRule()
 
-    private lateinit var service: MyTaxiService
+    private lateinit var service: MyPositionsService
 
     @Before
     fun setUp() {
-        service = createService(MyTaxiService::class.java, mockWebServerRule.url)
+        service = createService(MyPositionsService::class.java, mockWebServerRule.url)
     }
 
     @Test

@@ -8,11 +8,11 @@ import retrofit2.http.Query
 /**
  * Fake vehicles API
  */
-interface MyTaxiService {
+interface MyPositionsService {
 
     companion object {
 
-        const val URL = "https://fake-poi-api.mytaxi.com"
+        const val URL = "https://..."
 
     }
 

@@ -5,14 +5,14 @@ import arrow.core.Failure
 import arrow.core.Left
 import arrow.core.Right
 import com.example.maxcruz.data.exception.ServerException
-import com.example.maxcruz.data.remote.MyTaxiService
+import com.example.maxcruz.data.remote.MyPositionsService
 import com.example.maxcruz.domain.models.Point
 import com.example.maxcruz.domain.repository.PointListRepository
 
 /**
  * Repository pattern to retrieve vehicle data
  */
-class VehicleRepository(private val service: MyTaxiService): PointListRepository {
+class VehicleRepository(private val service: MyPositionsService): PointListRepository {
 
     /**
      * Get a list of vehicle points
